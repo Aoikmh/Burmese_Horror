@@ -13,10 +13,15 @@ public class RoadLooper : MonoBehaviour
 
     void Update()
     {
-        if (!moving)
+        if (!moving || player == null || roadSegments == null || roadSegments.Length == 0)
             return;
 
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
+        // Move EVERY segment backward — this was the bug: the old code
+        // moved RoadLooper's own transform instead of the segments.
+        foreach (Transform segment in roadSegments)
+        {
+            segment.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
+        }
 
         if (!looping)
             return;
