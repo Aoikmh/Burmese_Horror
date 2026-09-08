@@ -9177,6 +9177,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4459864850019384738, guid: 6bacecc4f3df9584198879c73a6b6c36, type: 3}
   m_PrefabInstance: {fileID: 1550762919}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1916720659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.87613
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6036707
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -179.70967
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
+      propertyPath: m_Name
+      value: banana tree
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31d0a17f7b29d15468ca2b054b1a5d67, type: 3}
 --- !u!4 &1919331035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3748dd63366231c48b2b5313b1b5d7cb, type: 3}
@@ -10327,3 +10384,4 @@ SceneRoots:
   - {fileID: 1212226295}
   - {fileID: 1122602965}
   - {fileID: 1977939506}
+  - {fileID: 1916720659}
