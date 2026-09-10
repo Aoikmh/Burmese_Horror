@@ -16,8 +16,6 @@ public class RoadLooper : MonoBehaviour
         if (!moving || player == null || roadSegments == null || roadSegments.Length == 0)
             return;
 
-        // Move EVERY segment backward — this was the bug: the old code
-        // moved RoadLooper's own transform instead of the segments.
         foreach (Transform segment in roadSegments)
         {
             segment.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
@@ -58,5 +56,32 @@ public class RoadLooper : MonoBehaviour
     {
         moving = false;
         looping = false;
+    }
+
+    // Hides every road segment except whichever one is currently
+    // closest to the player, so leftover straight segments don't
+    // clutter up the fork junction visually.
+    public void ShowOnlySegmentNearPlayer()
+    {
+        if (player == null || roadSegments == null || roadSegments.Length == 0)
+            return;
+
+        Transform nearest = null;
+        float nearestDist = float.MaxValue;
+
+        foreach (Transform segment in roadSegments)
+        {
+            float dist = Mathf.Abs(segment.position.z - player.position.z);
+            if (dist < nearestDist)
+            {
+                nearestDist = dist;
+                nearest = segment;
+            }
+        }
+
+        foreach (Transform segment in roadSegments)
+        {
+            segment.gameObject.SetActive(segment == nearest);
+        }
     }
 }

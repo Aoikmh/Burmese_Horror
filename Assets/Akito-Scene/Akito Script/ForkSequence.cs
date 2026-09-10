@@ -7,9 +7,12 @@ public class ForkSequence : MonoBehaviour
     public LinearMover forkMover;
     public Transform player;
 
-    public float approachTime = 8f;
+    [Tooltip("How close the fork needs to get to the player before it counts as 'arrived' and stops.")]
+    public float stopDistance = 10f;
 
-    [Tooltip("How far ahead of the player (in Z) the fork should appear when the sequence starts. Keep this bigger than forkMover's speed x approachTime so it's visible approaching from a distance, not already on top of the player.")]
+    [Tooltip("Fallback safety timeout in case it somehow never gets close enough.")]
+    public float approachTime = 15f;
+
     public float spawnDistanceAheadOfPlayer = 150f;
 
     [Header("On Arrived")]
@@ -26,9 +29,6 @@ public class ForkSequence : MonoBehaviour
         active = true;
         timer = 0f;
 
-        // Snap the fork to a position relative to the player RIGHT NOW,
-        // instead of relying on wherever it was pre-placed in the Editor —
-        // this is what keeps it lined up with the road no matter when dialogue ends.
         if (player != null)
         {
             Vector3 pos = forkMover.transform.position;
@@ -48,15 +48,34 @@ public class ForkSequence : MonoBehaviour
 
         timer += Time.deltaTime;
 
+        if (player != null)
+        {
+            float distance = Vector3.Distance(forkMover.transform.position, player.position);
+            if (distance <= stopDistance)
+            {
+                Arrive();
+                return;
+            }
+        }
+
         if (timer >= approachTime)
         {
-            roadLooper.StopDriving();
-            forkMover.StopMoving();
-
-            active = false;
-            Debug.Log("ARRIVED AT FORK!");
-
-            onArrived?.Invoke();
+            Arrive();
         }
+    }
+
+    public void Arrive()
+    {
+        if (!active)
+            return;
+
+        roadLooper.StopDriving();
+        roadLooper.ShowOnlySegmentNearPlayer();
+        forkMover.StopMoving();
+
+        active = false;
+        Debug.Log("ARRIVED AT FORK!");
+
+        onArrived?.Invoke();
     }
 }

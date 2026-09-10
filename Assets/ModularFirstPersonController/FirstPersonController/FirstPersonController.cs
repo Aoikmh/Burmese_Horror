@@ -27,6 +27,10 @@ public class FirstPersonController : MonoBehaviour
     public bool cameraCanMove = true;
     public float mouseSensitivity = 2f;
     public float maxLookAngle = 50f;
+    public bool limitLookRotation = false;
+    public float maxYawAngle = 90f; // 90 = 180° total range (90° left + 90° right of forward)
+    private float yawOffset = 0f;
+    private float referenceYaw;
 
     // Crosshair
     public bool lockCursor = true;
@@ -141,6 +145,7 @@ public class FirstPersonController : MonoBehaviour
         playerCamera.fieldOfView = fov;
         originalScale = transform.localScale;
         jointOriginalPos = joint.localPosition;
+        referenceYaw = transform.eulerAngles.y;
 
         if (!unlimitedSprint)
         {
@@ -207,7 +212,14 @@ public class FirstPersonController : MonoBehaviour
         // Control camera movement
         if(cameraCanMove)
         {
-            yaw = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseSensitivity;
+            yawOffset += Input.GetAxis("Mouse X") * mouseSensitivity;
+
+            if (limitLookRotation)
+            {
+                yawOffset = Mathf.Clamp(yawOffset, -maxYawAngle, maxYawAngle);
+            }
+
+            yaw = referenceYaw + yawOffset;
 
             if (!invertCamera)
             {
@@ -567,7 +579,10 @@ public class FirstPersonController : MonoBehaviour
         GUI.enabled = fpc.cameraCanMove;
         fpc.invertCamera = EditorGUILayout.ToggleLeft(new GUIContent("Invert Camera Rotation", "Inverts the up and down movement of the camera."), fpc.invertCamera);
         fpc.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Look Sensitivity", "Determines how sensitive the mouse movement is."), fpc.mouseSensitivity, .1f, 10f);
-        fpc.maxLookAngle = EditorGUILayout.Slider(new GUIContent("Max Look Angle", "Determines the max and min angle the player camera is able to look."), fpc.maxLookAngle, 40, 90);
+        fpc.limitLookRotation = EditorGUILayout.ToggleLeft(new GUIContent("Limit Look Rotation", "Restricts horizontal look to a fixed arc instead of a full 360."), fpc.limitLookRotation);
+
+        GUI.enabled = fpc.cameraCanMove && fpc.limitLookRotation;
+        fpc.maxYawAngle = EditorGUILayout.Slider(new GUIContent("Max Yaw Angle", "Degrees allowed left/right from forward. 90 = 180 total arc."), fpc.maxYawAngle, 10f, 180f);
         GUI.enabled = true;
 
         fpc.lockCursor = EditorGUILayout.ToggleLeft(new GUIContent("Lock and Hide Cursor", "Turns off the cursor visibility and locks it to the middle of the screen."), fpc.lockCursor);
