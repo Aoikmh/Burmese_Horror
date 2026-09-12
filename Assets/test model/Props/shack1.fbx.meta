@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 69b32a345429d6545bc181df0b9db0db
+guid: ce1ffb5078922b14e923e929c49ea6da
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: kindpng_6361939
-    second: {fileID: 2100000, guid: de2561500d8f7a74c87efc8a8725a032, type: 2}
+      name: Material.001
+    second: {fileID: 2100000, guid: 514b8e79e5bfe7145a4b6ae71b1c4099, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: thatch
+    second: {fileID: 2100000, guid: 7c10f5a9e75c1fb4b8949969d56ef9ab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
